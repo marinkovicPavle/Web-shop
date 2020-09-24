@@ -1,0 +1,35 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Korisnici</h2>
+<a href="/admin/korisnici/dodaj-korisnika" class="btn btn-primary">Dodaj novog korisnika</a>
+<br><br>
+
+<table class="table table-striped">
+    
+    <thead>
+        <tr>
+            <th>Korisnik</th>
+            <th>Izmeni</th>
+            <th>Obrisi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%korisnici.forEach(function(user){ %>
+        <tr>
+            <td><%= user.name %></td>
+            <% if (user.name == "Admin") { %>
+                <td></td>
+                <td></td>
+                <% } else {%>
+                    <% if(user.admin == 1){ %>
+                        <td><a href="/admin/korisnici/izmeni-korisnika/<%= user._id %>">Skini admina</a></td>
+                      <% } else{ %>  
+                        <td><a href="/admin/korisnici/izmeni-korisnika/<%= user._id %>">Postavi za admina</a></td>
+                     <% } %>
+                        <td><a class="confirmDeletion" href="/admin/korisnici/obrisi-korisnika/<%= user._id %>">Obrisi</a></td>    
+                <% } %>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+<%- include('../_layouts/adminfooter') %>

@@ -1,0 +1,22 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Izmeni kategoriju</h2>
+<a href="/admin/kategorije" class="btn btn-primary">Vrati se na sve kategorije</a>
+<br><br>
+
+<form method="post" action ="/admin/kategorije/izmeni-kategoriju/<%= id %>">
+    
+    <div class ="form-group">
+        <label for ="">Ime</label>
+        <input type ="text" class="form-control" name="title" value="<%= title %>" placeholder="Title">
+    </div>
+    
+    <div class ="form-group">
+        <label for ="">Opis</label>
+        <textarea name="desc" class="form-control" id="ta" cols="30" rows="10" placeholder="Opis"><%= desc %></textarea>
+    </div>
+     
+    <button class="btn btn-outline-dark">Posalji</button>
+</form>
+
+<%- include('../_layouts/adminfooter') %>

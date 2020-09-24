@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="generator" content="Jekyll v3.8.5">
+
+        <title>Hunter - <%= title%></title>
+
+        <link rel="shortcut icon" type="image/png" href="https://www.freepngimg.com/download/machine/41036-7-paintball-free-clipart-hq.png"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        <link rel="stylesheet" href="/css/style.css"/>
+
+        <!-- Footer css -->
+        <link rel="stylesheet" href="/css/Footer-with-social-icons.css">
+
+        <!-- Ikonice -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+        <!-- Sajdbar za kategorije proizvoda -->
+        <link href="/css/simple-sidebar.css" rel="stylesheet">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+
+    </head>
+    <body>
+        <div class="ajaxbg">
+            <div class="ajaxinner">
+                <h3>Sada cete biti prebaceni na Paypal stranicu...</h3>
+                <img src="/slike/ajax-loader.gif" alt=""/>
+            </div>
+        </div>
+
+        <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-primary">
+            <a class="navbar-brand" href="/">Hunter Prodavnica</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="navbar-nav mr-auto">
+                    <% pages.forEach(function(page){ %>
+                    <% if (page.slug == "pocetna") { %>
+                    <li class="nav-item"><a class="nav-link" href="/"><font color="white"><%= page.title %></font></a></li>
+                    <% } else {%>
+                    <li class="nav-item"><a class="nav-link" href="/<%= page.slug %>"><font color="white"><%= page.title %></font></a></li>
+                    <% } %>
+                    <% }); %>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                            <% if (typeof cart !== "undefined") {%>
+                                <a class="nav-link" href="/korpa/placanje"><font color="white"><i class="fas fa-shopping-cart"></i> <%= cart.length %></font></a>
+                                <% } else {%>
+                                <a href="#myModal" class="nav-link" data-toggle="modal"><font color="white"><i class="fas fa-shopping-cart"></i> 0</font></a>
+                                <% } %> 
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <% if (user) { %>
+                            <font color="white"><i class="fas fa-user"></i> <%= user.username %></font>
+                            <% }else { %>
+                            <font color="white"><i class="fas fa-user"></i> Profil</font>
+                            <% } %>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <% if (user) { %>
+                            <a class="dropdown-item" href="/korisnici/odjava"><i class="fas fa-sign-out-alt"></i> Odjavi se</a>
+                            <% }else { %>
+                            <a class="dropdown-item" href="/korisnici/prijava"><i class="fas fa-sign-in-alt"></i> Prijava</a>
+                            <a class="dropdown-item" href="/korisnici/registracija"><i class="fas fa-user-plus"></i> Registracija</a>
+                            <% } %>
+                        </div>
+                    </li>
+                     <% if (user && user.admin == 1) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/stranice"><font color="white"><i class="fas fa-users-cog"></i> Admin panel</font></a>  
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="myModal" class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Korpa je prazna</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Vasa korpa je trenutno prazna, za pocetak dodajte neke proizvode u korpu.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        <div class="container">
+            <%- messages('messages', locals) %>
+
+            <% if (errors) {%>
+            <% errors.forEach(function(error) { %>
+            <div class="alert alert-danger">
+                <%= error.msg %>
+            </div>
+            <% }); %>
+            <% } %>  

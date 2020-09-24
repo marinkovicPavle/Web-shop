@@ -1,0 +1,26 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Kategorije</h2>
+<a href="/admin/kategorije/dodaj-kategoriju" class="btn btn-primary">Dodaj novu kategoriju</a>
+<br><br>
+
+<table class="table table-striped">
+    
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%kategorije.forEach(function(cat){ %>
+        <tr>
+            <td><%= cat.title %></td>
+            <td><a href="/admin/kategorije/izmeni-kategoriju/<%= cat._id %>">Edit</a></td>
+            <td><a class="confirmDeletion" href="/admin/kategorije/obrisi-kategoriju/<%= cat._id %>">Delete</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+<%- include('../_layouts/adminfooter') %>

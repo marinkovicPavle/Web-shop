@@ -1,0 +1,43 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Proizvodi</h2>
+<a href="/admin/proizvodi/dodaj-proizvod" class="btn btn-primary">Dodaj novi proizvod</a>
+<br><br>
+
+<% if (count > 0){ %>                
+<table class="table table-striped alignmiddle">
+    
+    <thead>
+        <tr class="home">
+            <th>Proizvod</th>
+            <th>Cena</th>
+            <th>Kategorija</th>
+            <th>Slika</th>
+            <th>Izmeni</th>
+            <th>Obriši</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%products.forEach(function(products){ %>
+        <tr>
+            <td><%= products.title %></td>
+            <td><%= parseFloat(products.price) %> RSD</td>
+            <td><%= products.category %></td>
+            <td>
+                <% if (products.image == "") { %>
+                    <img id="noImage" src="/slike/nemaSlike.png">
+                <% } else { %>
+                    <img id="noImage" src="/slike_proizvoda/<%= products._id %>/<%= products.image %>">
+                <% } %>
+            </td>
+            <td><a href="/admin/proizvodi/izmeni-proizvod/<%= products._id %>">Izmeni</a></td>
+            <td><a class="confirmDeletion" href="/admin/proizvodi/obrisi-proizvod/<%= products._id %>">Obriši</a></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+<% } else { %>
+<h3 class="text-center">Trenutno nema proizvoda</h3>
+<% } %>
+
+<%- include('../_layouts/adminfooter') %>

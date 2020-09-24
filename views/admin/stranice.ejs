@@ -1,0 +1,49 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Stranice</h2>
+<a href="/admin/stranice/dodaj-stranu" class="btn btn-primary">Dodaj novu stranu</a>
+<br><br>
+
+<table class="table table-striped sorting">
+    
+    <thead>
+        <tr class="home">
+            <th>Title</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%stranice.forEach(function(page){ %>
+        <tr id="id_<%= page._id %>" class="<%= page.slug %>">
+            <td><%= page.title %></td>
+            <td><a href="/admin/stranice/izmeni-stranu/<%= page._id %>">Edit</a></td>
+            <% if (page.slug == "pocetna") { %>
+            <td></td>
+            <% } else {%>
+                 <td><a class="confirmDeletion" href="/admin/stranice/obrisi-stranicu/<%= page._id %>">Delete</a></td>
+            <% }%>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+
+<script>
+    
+    $('tbody').sortable({
+       
+        items: "tr:not('.home')",
+        placeholder: "ui-state-hightlight",
+        update: function() {
+            var ids = $('tbody').sortable("serialize");
+            var url = "/admin/stranice/reorder-pages";
+            
+            $.post(url,ids);
+        }
+    });
+    
+</script>
+
+<%- include('../_layouts/adminfooter') %>

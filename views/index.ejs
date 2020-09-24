@@ -1,0 +1,54 @@
+<% include _layouts/header %>
+
+<% switch (page) {
+case '/' : %>
+        <center><p><img src="https://store.steampowered.com/gfxproxy/apps/894600/extras/3_Become_a_Hunter_Design_the_Hunt.jpg" class="img-fluid" alt="Responsive image" height="300"></p>
+        <h2><b>Hunter - Lovacka oprema</b></h2></center>
+        
+        <% break;
+
+case '/chat' : %>
+            <link href="/css/chatstyle.css" rel="stylesheet" />
+<div id="mario-chat">
+            <h2 class="text-center">
+                <p>Ćaskanje </p> 
+                <% if (user && user.admin == 1) { %>
+                    <button id="clear" class="btn btn-danger">Obrisi cet</button>
+                <% } %>
+            </h2>
+            <div id="chat-window">
+                <div id="output">
+                    <% comments.forEach(function(kom){ %>
+                        <p><strong><%= kom.handle %>:</strong> <%= kom.message %></p>
+                    <% }); %>
+                </div>
+                <div id="feedback"></div>
+            </div>
+            <% if (user) { %>
+                    <input id="handle" type="text" placeholder="Ime" value="<%= user.username %>" disabled/>
+            <% } else {%>
+                    <input id="handle" type="text" placeholder="Ime" value="Anonimni clan" disabled/>
+            <% } %>
+            <input id="message" type="text" placeholder="Poruka" />
+            <button id="send">Pošalji</button>
+        </div>
+        <% break;
+
+        case '/o-nama' : %>  
+       <iframe width="100%" height="315" src="https://www.youtube.com/embed/haHgRSB8c1k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+       <br><br><br>
+       <p class="text-center">"Hunter" osnovan je 2018. godine. Od osnivanja pa do danas trudili smo se zadovoljiti sve potrebe i želje naših kupaca kojih je svake godine sve više. Kao zastupnici svetskih i domaćih brendova omogućili smo našim kupcima širok asortiman i povoljne cene.
+        </p>
+        <p class="text-center">Trenutno posedujemo velikoprodaju i maloprodaju na dve lokacije. Maloprodaja i velikoprodaja u Novom Sadu se nalazi na adresi Žanova S-6. Kod nas možete naći kompletnu opremu za lov i ribolov, municiju i oružje, sve za Vaš boravak u prirodi,kao i pirotehniku i sve to po povoljnim cenama.
+        </p>
+        <p class="text-center">Kako smo uvek bili spremni da Vam budemo prvo odredište za kupovinu Vaše opreme imate mogućnost da preko interneta brzo i efikasno poručite sve iz naše ponude, a da Vam ona bude isporučena na najbrži moguči način i naravno po najpovoljnijim uslovima.
+        </p>
+        <p class="text-center">Iskustvo koje imamo upotrebićemo da Vam i nadalje budemo verni pratilac u Vašem hobiju. Ljubazno osoblje, veliko iskustvo iza nas, zastupništvo velikog broja renomiranih brendova u zemlji i inostranstvu, povoljne cene i snabdevenost je ono zbog čega treba da postanete naš kupac ako to već niste.
+        </p>
+       <% break;
+
+} %>
+
+<%- content %>
+
+<% include _layouts/footer %>

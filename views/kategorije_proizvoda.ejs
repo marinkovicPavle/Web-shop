@@ -1,0 +1,49 @@
+<% include _layouts/header %>
+
+</div>
+
+<style type="text/css" scoped>
+        body {padding-top: 55px;}
+</style>
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper" >
+        <a href="/proizvodi" class="vrati-se list-group-item list-group-item-action bg-light"><i class="fas fa-arrow-circle-left"></i> Vrati se na sve proizvode</a>
+      <div class="sidebar-heading">Kategorije</div>
+      <div class="list-group list-group-flush">
+        <% categories.forEach(function(c){ %>
+        <a href="/proizvodi/<%= c.slug %>" class="list-group-item list-group-item-action bg-light"><%= c.title %></a>
+        <% }); %>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <h1 class="mt-4"><%= title %></h1>
+        <p><%- desc %></p>
+      <div class="row products">
+    
+    <% products.forEach(function(p){ %>
+    <div class="col-cs-12 col-md-4 p">
+        <a class="pa" href="/proizvodi/<%= p.category %>/<%= p.slug %>">
+            <img class="pimage" src="/slike_proizvoda/<%= p.id %>/<%= p.image %>" alt="">
+        </a>
+        <h3><%= p.title %></h3>
+        <h4>Cena: <%= parseFloat(p.price) %> RSD</h4>
+        <button onclick="location.href='/proizvodi/<%= p.category %>/<%= p.slug %>'" class="btn btn-primary" type="button">
+          <i class="fas fa-plus-square"></i> Pogledaj opsirnije</button>
+    </div>
+    <% }); %>
+    
+</div>
+      
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+
+<% include _layouts/footer %>

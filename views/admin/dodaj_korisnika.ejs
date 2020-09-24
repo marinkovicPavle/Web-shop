@@ -1,0 +1,40 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Dodaj korisnika</h2>
+<a href="/admin/korisnici" class="btn btn-primary">Vrati se na sve korisnike</a>
+<br><br>
+
+<form method="post" action ="/admin/korisnici/dodaj-korisnika">
+    
+    <div class ="form-group">
+        <label for ="">Ime i prezime</label>
+        <input type ="text" class="form-control" name="name" value="<%= name %>" placeholder="Ime">
+    </div>
+    
+    <div class ="form-group">
+        <label for ="">Email</label>
+        <input type ="text" class="form-control" name="email" value="<%= email %>" placeholder="Email">
+    </div>
+
+    <div class ="form-group">
+        <label for ="">Korisnicko ime</label>
+        <input type ="text" class="form-control" name="username" value="<%= username %>" placeholder="Korisnicko">
+    </div>
+
+    <div class ="form-group">
+        <label for ="">Sifra</label>
+        <input type ="password" class="form-control" name="password" value="<%= password %>" placeholder="Sifra">
+    </div>
+    
+    <div class ="form-group">
+        <label for ="">Admin</label>
+        <select class="custom-select mr-sm-2" name="admin">
+            <option value="0">Ne</option>
+            <option value="1">Da</option>
+          </select>
+    </div>
+    
+    <button class="btn btn-outline-dark">Posalji</button>
+</form>
+
+<%- include('../_layouts/adminfooter') %>

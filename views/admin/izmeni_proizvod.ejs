@@ -1,0 +1,118 @@
+<%- include('../_layouts/adminheader') %>
+
+<h2 class="page-title">Izmeni proizvod</h2>
+<a href="/admin/proizvodi" class="btn btn-primary">Vrati se na sve proizvode</a>
+<br><br>
+
+<form method="post" action ="/admin/proizvodi/izmeni-proizvod/<%= id %>" enctype="multipart/form-data">
+
+    <div class ="form-group">
+        <label for ="">Naslov</label>
+        <input type ="text" class="form-control" name="title" value="<%= title %>" placeholder="Naslov">
+    </div>
+
+    <div class ="form-group">
+        <label for ="">Opis</label>
+        <textarea name="desc" class="form-control" cols="30" rows="10" placeholder="Opis"><%= desc %></textarea>
+    </div>
+
+    <div class ="form-group">
+        <label for ="">Kategorija</label>
+        <select name="category" class="form-control">
+            <% categories.forEach(function(cat){ %>
+            <option value="<%= cat.slug %>"
+                    <% if (cat.slug == category) { %>
+                    selected = "selected"
+                    <% } %>
+                    ><%= cat.title %></option>
+            <% }); %>
+        </select>
+    </div>
+
+    <div class ="form-group">
+        <label for ="">Cena</label>
+        <input type ="text" class="form-control" name="price" value="<%= price %>" placeholder="Cena">
+    </div>
+
+    <div class ="form-group">
+        <label for ="">Trenutna slika</label>
+        <p>
+            <% if (image == "") { %>
+            <img id ="noImage" src="/slike/nemaSlike.png" alt="">
+            <% } else {%>
+            <img id ="noImage" src="/slike_proizvoda/<%= id %>/<%= image %>" alt="">
+            <% } %>
+        </p>
+    </div>
+
+    <div class ="form-group">
+        <label for ="">Ubaci Sliku</label>
+        <input type="file" class="form-control" name="image" id="img"/>
+        <img src="#" id="imgPreview" alt="">
+    </div>
+
+    <input type="hidden" name="pimage" value="<%= image %>">
+    
+    <button class="btn btn-outline-dark">Posalji</button>
+</form>
+
+<hr>
+<h3 class="page-header">Galerija</h3>
+
+<ul class="gallery">
+    <% galleryImages.forEach(function(image){ %>
+    <% if (image != "ikonice") { %>
+    <li>
+        <img src="/slike_proizvoda/<%= id %>/galerija/ikonice/<%= image %>" alt="">&nbsp;
+        <a class="confirmDeletion" href="/admin/proizvodi/obrisi-sliku/<%= image %>?id=<%= id %>">Obrisi</a>
+    </li>
+    <% } %>
+    <% }); %>
+</ul>
+
+<br><br>
+<form action="/admin/proizvodi/galerija-proizvoda/<%= id %>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
+    <div class="fallback">
+        <input type="file" name="file" multiple>
+        <input type="sumbit" value="Ubaci">
+    </div>
+</form>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/basic.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>
+
+<script>
+    //pregled uploadovane slike
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $("#imgPreview").attr('src', e.target.result).width(100).height(100);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#img").change(function () {
+        readURL(this);
+    });
+    
+    //Dropzona
+    Dropzone.options.dropzoneForm = {
+        acceptedFiles: "image/*",
+        init: function() {
+            this.on("queuecomplete", function(file) {
+                setTimeout(function() {
+                    location.reload()
+                    }, 1000);
+                });
+        }
+    }
+    
+    
+</script>
+
+<%- include('../_layouts/adminfooter') %>

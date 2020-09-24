@@ -1,0 +1,65 @@
+<% include _layouts/header %>
+</div>
+
+<style type="text/css" scoped>
+        body {padding-top: 55px;}
+</style>
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper" >
+        <a href="/proizvodi" class="vrati-se list-group-item list-group-item-action bg-light"><i class="fas fa-arrow-circle-left"></i> Vrati se na sve proizvode</a>
+      <div class="sidebar-heading">Kategorije proizvoda</div>
+      <div class="list-group list-group-flush">
+        <% categories.forEach(function(c){ %>
+        <a href="/proizvodi/<%= c.slug %>" class="list-group-item list-group-item-action bg-light"><%= c.title %></a>
+        <% }); %>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <h1 class="mt-4"><%= p.title %></h1>
+        <div class="row">   
+    <div class="col-xs-12 col-md-5">
+        <br>
+        <img class="spi" src="/slike_proizvoda/<%= p.id %>/<%= p.image %>" alt="">
+        <br>
+    </div>
+    
+    <div class="col-xs-12 col-md-7">
+        <br>
+        <p><h3>Opis proizvoda: </h3></p>
+        <p><%= p.desc %></p>
+        <p><h5>Cena:</h5> <%= parseFloat(p.price) %> RSD</p> 
+        <% if (loggedIn) { %>
+            <button onclick="location.href='/korpa/dodaj-u-korpu/<%= p.slug %>'" class="btn btn-primary" type="button">
+                <i class="fas fa-cart-plus"></i> Dodaj u korpu</button>       
+        <% }else { %>
+            <p>Morate se ulogovati da bi ste kupili proizvode.</p>
+        <% } %>
+    </div>
+    
+    <div class="col-xs-12">
+        <ul class="gallery" >
+            <% galleryImages.forEach(function(image) { %>
+                <% if (image != "ikonice") { %>
+                <li>
+                    <a data-fancybox="gallery" href="/slike_proizvoda/<%= p.id %>/galerija/<%= image %>">
+                        <img src="/slike_proizvoda/<%= p.id %>/galerija/ikonice/<%= image %>" alt="">
+                    </a>
+                </li>
+                <% } %>
+            <% }); %>
+        </ul>
+    </div>
+</div>
+      
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+
+<% include _layouts/footer %>

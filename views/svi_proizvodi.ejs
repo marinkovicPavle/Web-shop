@@ -1,0 +1,54 @@
+<% include _layouts/header %>
+</div>
+
+<style type="text/css" scoped>
+        body {padding-top: 55px;}
+</style>
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper" >
+        
+      <div class="sidebar-heading">Kategorije</div>
+      <div class="list-group list-group-flush">
+        <% categories.forEach(function(c){ %>
+        <a href="/proizvodi/<%= c.slug %>" class="list-group-item list-group-item-action bg-light"><%= c.title %></a>
+        <% }); %>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <h1 class="mt-4">Hunter prodavnica</h1>
+        <p>Dobrodosli u Hunter prodavnicu lovacke opreme. Ovde mozete naci veliki izbor profesionalne i rekreativne opreme za lov.</p>
+        <p>Ako Vam je potreban neki proizvod, a ne mozete ga naci u ponudi, slobodno nam pisite na cetu <a href="/chat"><b>caskanje</b></a>.</p>
+        <p>Radno vreme kontakt centra: ponedeljak-subota od 08 do 16 casova.</p>
+      
+      <div class="row products">
+    <% products.forEach(function(p){ %>
+    <div class="col-cs-12 col-md-3 p">
+        <a class="pa" href="/proizvodi/<%= p.category %>/<%= p.slug %>">
+            <img class="pimage" src="/slike_proizvoda/<%= p.id %>/<%= p.image %>" alt="">
+        </a>
+        <h3><%= p.title %></h3>
+        <h4>Cena: <b><%= parseFloat(p.price) %></b> RSD</h4>
+        <button onclick="location.href='/proizvodi/<%= p.category %>/<%= p.slug %>'" class="btn btn-primary" type="button">
+          <i class="fas fa-plus-square"></i> Pogledaj opsirnije</button>
+    </div>
+    <% }); %>
+</div>
+      
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+
+
+
+
+
+
+<% include _layouts/footer %>
