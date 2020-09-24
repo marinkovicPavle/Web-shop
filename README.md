@@ -11,4 +11,5 @@ Then `nodemon app.js` for deploying application.
 Open http://localhost:3000 to view it in the browser.  
 The page will automatically reload if you make edits.  
 ## Screenshots
-![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png | width=100)
+<a href="url"><img src="https://i.imgur.com/RKeBa0b.png" align="left" height="48" width="48" ></a>
+
