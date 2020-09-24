@@ -11,4 +11,4 @@ Then `nodemon app.js` for deploying application.
 Open http://localhost:3000 to view it in the browser.  
 The page will automatically reload if you make edits.  
 ## Screenshots
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/5Ginhrs"  ><a href="//imgur.com/a/5Ginhrs">Web shop app v1.0</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<a href="https://www.w3schools.com/">Visit W3Schools.com!</a>
